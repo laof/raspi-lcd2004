@@ -6,8 +6,6 @@ build
 ```
 go build lcd2004
 chmod 777 lcd2004
-
-
 ```
 
 编辑文件 sudo nano /etc/rc.local

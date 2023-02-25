@@ -1,11 +1,21 @@
 ### 自启动
 
+build
+
+
+```
 go build lcd2004
 chmod 777 lcd2004
-sudo nano /etc/rc.local 在exit 0之前写入
-```
-sodu /home/pi/raspi-lcd2004/lcd2004
 
+
+```
+
+编辑文件 sudo nano /etc/rc.local
+
+```
+...
+sodu /home/pi/raspi-lcd2004/lcd2004
+exit 0
 ```
 
 ### meadme

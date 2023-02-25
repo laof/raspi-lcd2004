@@ -1,9 +1,10 @@
 ### 自启动
 
-chmod 777 my_script.sh
+go build lcd2004
+chmod 777 lcd2004
 sudo nano /etc/rc.local 在exit 0之前写入
 ```
-su pi -c "go run /home/pi/raspi-lcd2004/main.go"
+sodu /home/pi/raspi-lcd2004/lcd2004
 
 ```
 

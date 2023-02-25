@@ -3,9 +3,9 @@
 ### Install latest Golang
 https://golang.google.cn/dl
 
-arm64是针对于64位的树莓派系统
+arm64是针对于64位的树莓派系统, 下载arm6l
 
-下载arm6l
+
 ```
 wget https://golang.google.cn/dl/go1.20.1.linux-armv6l.tar.gz
 ```

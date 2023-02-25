@@ -1,4 +1,5 @@
-
+### meadme
+https://github.com/laof/raspi-lcd2004
 
 ### Install latest Golang
 https://golang.google.cn/dl

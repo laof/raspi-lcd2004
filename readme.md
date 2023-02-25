@@ -5,7 +5,7 @@ sudo raspi-config
 i2cdetect -y 1
 
 
-LCD2004 display with I2C------- Raspberry 4b I2C
+### LCD2004 display with I2C------- Raspberry 4b I2C
 
 
 VCC----------5V  [2]

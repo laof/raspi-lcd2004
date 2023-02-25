@@ -27,6 +27,7 @@ func main() {
 	defer lcd.Clear()
 	defer i2c.Close()
 
+	fmt.Println("LCD_20x4 ok")
 	// welcome
 	lcd.SetPosition(0, 0)
 	fmt.Fprint(lcd, "Hi, Raspberry Pi 4b!")

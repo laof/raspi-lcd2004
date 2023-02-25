@@ -1,15 +1,12 @@
 ### 自启动
 
 build
-
-
 ```
 go build lcd2004
 chmod 777 lcd2004
 ```
 
 编辑文件 sudo nano /etc/rc.local
-
 ```
 ...
 sudo /home/pi/raspi-lcd2004/lcd2004
@@ -29,12 +26,10 @@ arm64是针对于64位的树莓派系统, 下载arm6l
 wget https://golang.google.cn/dl/go1.20.1.linux-armv6l.tar.gz
 ```
 
-
 安装
 ```
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.20.1.linux-armv6l.tar.gz
 ```
-
 
 查看
 ```

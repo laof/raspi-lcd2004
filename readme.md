@@ -1,7 +1,7 @@
 
 
-### Install latest golang
-https://golang.google.cn/dl/
+### Install latest Golang
+https://golang.google.cn/dl
 
 arm64是针对于64位的树莓派系统
 

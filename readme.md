@@ -1,17 +1,23 @@
-### enable I2C
+### Enable I2C
+
+```
 sudo raspi-config
+```
 
-
+```
 i2cdetect -y 1
+```
+
+### display
+
+![image](https://github.com/laof/laof.github.io/raw/main/img/pi/golang.png)
 
 
-### LCD2004 display with I2C------- Raspberry 4b I2C
+### I2C connection
 
+![image](https://github.com/laof/laof.github.io/raw/main/img/pi/lcd.png)
 
-VCC----------5V  [2]
+### gpio
 
-GND----------GND [9]
+![image](https://github.com/laof/laof.github.io/raw/main/img/pi/gpio.png)
 
-SDA----------SDA [3]
-
-SCL----------SCL [5]

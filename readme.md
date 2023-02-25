@@ -12,7 +12,7 @@ chmod 777 lcd2004
 
 ```
 ...
-sodu /home/pi/raspi-lcd2004/lcd2004
+sudo /home/pi/raspi-lcd2004/lcd2004
 exit 0
 ```
 

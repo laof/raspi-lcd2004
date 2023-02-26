@@ -35,6 +35,7 @@ sudo nano /etc/rc.local
 add
 ```
 ...
+sudo /xxxxx &
 sudo /home/pi/raspi-lcd2004/lcd2004
 exit 0
 ```

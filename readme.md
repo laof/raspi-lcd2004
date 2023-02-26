@@ -15,6 +15,7 @@ network={
 update resource
 ```
 sudo apt update
+sudo apt upgrade
 ```
 
 

@@ -23,7 +23,7 @@ sudo apt upgrade
 
 build
 ```
-go build lcd2004
+go build -o lcd2004
 chmod 777 lcd2004
 chmod +x lcd2004
 ```

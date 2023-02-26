@@ -79,6 +79,8 @@ source ~/.profile
 check
 ```
 go version
+go env -w GOPROXY=https://goproxy.cn,direct
+
 ```
 
 ### Enable I2C

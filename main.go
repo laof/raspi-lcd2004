@@ -40,6 +40,6 @@ func main() {
 		fmt.Fprint(lcd, t.Format("Monday Jan 2"))
 		lcd.SetPosition(3, 0)
 		fmt.Fprint(lcd, t.Format("15:04:05  2006-01-02"))
-		time.Sleep(3 * time.Second)
+		time.Sleep(333 * time.Millisecond)
 	}
 }

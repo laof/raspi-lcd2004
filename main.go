@@ -27,12 +27,12 @@ func main() {
 	defer lcd.Clear()
 	defer i2c.Close()
 
-	fmt.Println("LCD_20x4 ok")
+	fmt.Println(time.Now().Format("2006-01-02 15:04:05"), " LCD_20x4 ok")
 	// welcome
 	lcd.SetPosition(0, 0)
 	fmt.Fprint(lcd, "Hi, Raspberry Pi 4b!")
 	lcd.SetPosition(1, 0)
-	fmt.Fprint(lcd, "Welcome to LCD_20x4")
+	fmt.Fprint(lcd, time.Now().Format("01-02 15:04:05"))
 	for {
 		lcd.Home()
 		t := time.Now()

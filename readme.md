@@ -1,3 +1,18 @@
+### 无桌面版配置WiFi
+在boot盘中新建 wpa_supplicant.conf 文件，内容如下：
+
+```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=CN
+ 
+network={
+	ssid="wifiname"
+	psk="psw"
+}
+```
+
+
 ### 自启动
 
 build

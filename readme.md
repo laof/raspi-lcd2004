@@ -112,10 +112,13 @@ i2cdetect -y 1
 
 ![image](https://github.com/laof/laof.github.io/raw/main/img/pi/gpio.png)
 
-### meadme
-https://github.com/laof/raspi-lcd2004
+
 
 ### clone 
 ```
 https://github.com/laof/raspi-lcd2004.git
+
 ```
+
+### readme
+https://github.com/laof/raspi-lcd2004

@@ -12,6 +12,11 @@ network={
 }
 ```
 
+update resource
+```
+sudo apt update
+```
+
 
 ### autostart
 

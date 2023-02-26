@@ -1,5 +1,5 @@
-### 无桌面版配置WiFi
-在boot盘中新建 wpa_supplicant.conf 文件，内容如下：
+### setup WiFi for lite img
+new a file wpa_supplicant.conf in root folder，adding as below
 
 ```
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
@@ -13,7 +13,7 @@ network={
 ```
 
 
-### 自启动
+### autostart
 
 build
 ```
@@ -21,32 +21,56 @@ go build lcd2004
 chmod 777 lcd2004
 ```
 
-编辑文件 sudo nano /etc/rc.local
+edit
+```
+sudo nano /etc/rc.local
+```
+add
 ```
 ...
 sudo /home/pi/raspi-lcd2004/lcd2004
 exit 0
 ```
 
-### meadme
-https://github.com/laof/raspi-lcd2004
 
 ### Install latest Golang
-https://golang.google.cn/dl
 
-arm64是针对于64位的树莓派系统, 下载arm6l
-
+arm64 for raspberry 64 bit system, we will to download xx.arm6l file, for more version please to see https://golang.google.cn/dl 
 
 ```
 wget https://golang.google.cn/dl/go1.20.1.linux-armv6l.tar.gz
 ```
 
-安装
+installing
 ```
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.20.1.linux-armv6l.tar.gz
 ```
 
-查看
+editing configuration
+
+```
+sudo nano ~/.profile
+```
+
+adding path
+
+```
+...
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# set go path here
+export PATH=$PATH:/usr/local/go/bin
+```
+
+updating
+```
+source ~/.profile
+```
+
+check
 ```
 go version
 ```
@@ -57,7 +81,7 @@ go version
 sudo raspi-config
 ```
 
-侦测连接设备
+detect connected devices
 
 ```
 i2cdetect -y 1
@@ -88,3 +112,5 @@ i2cdetect -y 1
 
 ![image](https://github.com/laof/laof.github.io/raw/main/img/pi/gpio.png)
 
+### meadme
+https://github.com/laof/raspi-lcd2004

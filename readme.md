@@ -114,3 +114,8 @@ i2cdetect -y 1
 
 ### meadme
 https://github.com/laof/raspi-lcd2004
+
+### clone 
+```
+https://github.com/laof/raspi-lcd2004.git
+```

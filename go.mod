@@ -3,13 +3,12 @@ module lcd2004
 go 1.19
 
 require (
-	github.com/laof/go-i2c v0.0.0-20230225105526-129d8e4e6f20
-	github.com/laof/go-lcd v0.0.0-20230225112212-ba7a6b0f91af
+	github.com/d2r2/go-hd44780 v0.0.0-20181002113701-74cc28c83a3e
+	github.com/d2r2/go-i2c v0.0.0-20191123181816-73a8a799d6bc
+	github.com/d2r2/go-logger v0.0.0-20210606094344-60e9d1233e22
 )
 
 require (
-	github.com/c9s/goprocinfo v0.0.0-20210130143923-c95fcf8c64a8 // indirect
-	github.com/d2r2/go-logger v0.0.0-20210606094344-60e9d1233e22 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7 // indirect
 )

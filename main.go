@@ -11,8 +11,9 @@ import (
 	"sync"
 	"time"
 
-	i2c "github.com/laof/go-i2c"
-	device "github.com/laof/go-lcd"
+	device "github.com/d2r2/go-hd44780"
+	i2c "github.com/d2r2/go-i2c"
+	logger "github.com/d2r2/go-logger"
 )
 
 func check(err error) {
@@ -29,12 +30,14 @@ func d2(nub float64) float64 {
 var mutex sync.Mutex
 
 func main() {
+
+	logger.ChangePackageLogLevel("i2c", logger.InfoLevel)
 	i2c, err := i2c.NewI2C(0x27, 1)
 	check(err)
 
 	lcd, e := device.NewLcd(i2c, device.LCD_20x4)
 	check(e)
-	lcd.BacklightOff()
+	lcd.BacklightOn()
 	lcd.Clear()
 
 	defer lcd.Clear()
@@ -65,7 +68,7 @@ func main() {
 		lcd.SetPosition(3, 0)
 		fmt.Fprint(lcd, t.Format("15:04:05  2006-01-02"))
 		mutex.Unlock()
-		time.Sleep(333 * time.Millisecond)
+		time.Sleep(1 * time.Second)
 	}
 }
 

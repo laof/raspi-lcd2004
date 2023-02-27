@@ -131,3 +131,26 @@ git clone https://github.com/laof/raspi-lcd2004.git
 
 ### readme
 https://github.com/laof/raspi-lcd2004
+
+
+### root ssh
+
+```
+sudo nano /etc/ssh/sshd_config
+```
+add permission
+```
+#PermitRootLogin prohibit-password
+#add here
+PermitRootLogin yes
+```
+
+setup new passwd for root
+
+```
+sudo passwd root
+```
+reboot
+```
+sudo reboot
+```

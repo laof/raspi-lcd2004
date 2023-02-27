@@ -154,3 +154,8 @@ reboot
 ```
 sudo reboot
 ```
+
+disk info
+```
+df -h
+```

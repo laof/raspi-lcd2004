@@ -69,7 +69,7 @@ func main() {
 
 	//weather
 	lcd.SetPosition(2, 0)
-	show(lcd, "")
+	show(lcd, "Update Weather...")
 
 	go func() {
 		for {

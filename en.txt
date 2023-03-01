@@ -1,0 +1,136 @@
+晴
+Clear
+少云
+Shaoyun
+晴间多云
+Cloudy on sunny days
+多云
+cloudy
+阴
+Overcast
+有风
+Windy
+平静
+calm
+微风
+breeze
+和风
+a gentle wind
+清风
+cool breeze
+强风/劲风
+Strong wind/strong wind
+疾风
+Gale
+大风
+gale
+烈风
+Gale
+风暴
+storm
+狂爆风
+Explosive blast
+飓风
+hurricane
+热带风暴
+tropical storm
+霾
+Haze
+中度霾
+Moderate haze
+重度霾
+Severe haze
+严重霾
+Severe haze
+阵雨
+shower
+雷阵雨
+thunder shower
+雷阵雨并伴有冰雹
+Thunder shower with hail
+小雨
+light rain
+中雨
+moderate rain
+大雨
+heavy rain
+暴雨
+Rainstorm
+大暴雨
+Heavy rainstorm
+特大暴雨
+Extremely heavy rainstorm
+强阵雨
+Strong shower
+强雷阵雨
+Strong thunderstorm
+极端降雨
+Extreme rainfall
+毛毛雨/细雨
+Drizzle/drizzle
+雨
+rain
+小雨-中雨
+Light rain - moderate rain
+中雨-大雨
+Moderate rain - heavy rain
+大雨-暴雨
+Heavy rain - rainstorm
+暴雨-大暴雨
+Rainstorm - heavy rainstorm
+大暴雨-特大暴雨
+Heavy rainstorm - extremely heavy rainstorm
+雨雪天气
+Rain and snow weather
+雨夹雪
+sleet
+阵雨夹雪
+Shower with snow
+冻雨
+Freezing rain
+雪
+snow
+阵雪
+snow shower
+小雪
+Minor Snow
+中雪
+moderate snow
+大雪
+Major Snow
+暴雪
+Blizzard
+小雪-中雪
+Light snow - moderate snow
+中雪-大雪
+Moderate snow - heavy snow
+大雪-暴雪
+Heavy snow - blizzard
+浮尘
+Floating dust
+扬沙
+Raise sand
+沙尘暴
+sand storm
+强沙尘暴
+Strong sandstorm
+龙卷风
+tornado
+雾
+fog
+浓雾
+dense fog
+强浓雾
+Strong fog
+轻雾
+mist
+大雾
+dense fog
+特强浓雾
+Very strong fog
+热
+heat
+冷
+cold
+未知
+unknown

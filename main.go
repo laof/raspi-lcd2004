@@ -2,11 +2,14 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
 	"math"
+	"net/http"
+	"os"
 	"os/exec"
 	"regexp"
 	"strconv"
@@ -56,25 +59,37 @@ func main() {
 	fmt.Println(time.Now().Format("2006-01-02 15:04:05"), " LCD_20x4 ok")
 
 	lcd.Home()
-	// welcome
+	// wifi
 	lcd.SetPosition(0, 0)
 	show(lcd, "Hello,")
 
+	// cpu
 	lcd.SetPosition(1, 0)
 	show(lcd, "Raspberry Pi!")
 
+	//weather
+	lcd.SetPosition(2, 0)
+	show(lcd, "")
+
 	go func() {
 		for {
-			info(lcd)
+			wifiCpuInfo(lcd)
 			time.Sleep(3 * time.Second)
+		}
+	}()
+
+	go func() {
+		time.Sleep(10 * time.Second)
+		weatherInfo(lcd)
+		for {
+			time.Sleep(30 * time.Minute)
+			weatherInfo(lcd)
 		}
 	}()
 
 	for {
 		mutex.Lock()
 		t := time.Now()
-		lcd.SetPosition(2, 0)
-		show(lcd, t.Format("Monday Jan"))
 		lcd.SetPosition(3, 0)
 		show(lcd, t.Format("15:04:05  2006-01-02"))
 		mutex.Unlock()
@@ -82,7 +97,7 @@ func main() {
 	}
 }
 
-func info(lcd *device.Lcd) {
+func wifiCpuInfo(lcd *device.Lcd) {
 
 	idle0, total0 := cpu()
 	time.Sleep(3 * time.Second)
@@ -188,5 +203,89 @@ func safeScreen(txt string) string {
 	num = int(math.Abs(float64(num)))
 
 	return fmt.Sprintf("%v%v", txt, empty[0:num])
+
+}
+
+var list []string
+
+func weatherInfo(lcd *device.Lcd) {
+
+	w, t := weatherapi()
+	data, err := os.ReadFile("en.txt")
+
+	if err != nil {
+		return
+	}
+
+	list = strings.Split(string(data), "\r\n")
+
+	var en string = "unknown"
+
+	for i, v := range list {
+
+		if v == w {
+			en = list[i+1]
+			break
+		}
+	}
+
+	mutex.Lock()
+	lcd.SetPosition(2, 0)
+	show(lcd, fmt.Sprintf("%v %v'C", en, t))
+	mutex.Unlock()
+
+}
+
+type JSONData struct {
+	Status   string  `json:"status"`
+	Count    string  `json:"count"`
+	Info     string  `json:"info"`
+	Infocode string  `json:"infocode"`
+	Lives    []Lives `json:"lives"`
+}
+type Lives struct {
+	Province         string `json:"province"`
+	City             string `json:"city"`
+	Adcode           string `json:"adcode"`
+	Weather          string `json:"weather"`
+	Temperature      string `json:"temperature"`
+	Winddirection    string `json:"winddirection"`
+	Windpower        string `json:"windpower"`
+	Humidity         string `json:"humidity"`
+	Reporttime       string `json:"reporttime"`
+	TemperatureFloat string `json:"temperature_float"`
+	HumidityFloat    string `json:"humidity_float"`
+}
+
+var url, _ = os.ReadFile("url.txt")
+
+func weatherapi() (string, string) {
+
+	if url == nil {
+		return "-", "-"
+	}
+
+	resr, err := http.Get(string(url))
+
+	if err != nil {
+		return "-", "-"
+	}
+
+	defer resr.Body.Close()
+
+	body, e := io.ReadAll(resr.Body)
+
+	if e != nil {
+		return "-", "-"
+	}
+
+	var data *JSONData
+	err = json.Unmarshal(body, &data)
+
+	if err != nil {
+		return "-", "-"
+	}
+
+	return data.Lives[0].Weather, data.Lives[0].Temperature
 
 }

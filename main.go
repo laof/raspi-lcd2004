@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	. "embed"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -9,7 +10,6 @@ import (
 	"log"
 	"math"
 	"net/http"
-	"os"
 	"os/exec"
 	"regexp"
 	"strconv"
@@ -21,6 +21,12 @@ import (
 	i2c "github.com/d2r2/go-i2c"
 	logger "github.com/d2r2/go-logger"
 )
+
+//go:embed api
+var api []byte
+
+//go:embed en
+var us []byte
 
 func check(err error) {
 	if err != nil {
@@ -208,16 +214,16 @@ func safeScreen(txt string) string {
 
 var list []string
 
+var english = string(us)
+
 func weatherInfo(lcd *device.Lcd) {
 
-	w, t := weatherapi()
-	data, err := os.ReadFile("./en")
-
-	if err != nil {
+	if english == "" {
 		return
 	}
 
-	list = strings.Split(string(data), "\r\n")
+	w, t := weatherapi()
+	list = strings.Split(english, "\r\n")
 
 	var en string = "unknown"
 
@@ -257,11 +263,11 @@ type Lives struct {
 	HumidityFloat    string `json:"humidity_float"`
 }
 
-var url, _ = os.ReadFile("./api")
+var url = string(api)
 
 func weatherapi() (string, string) {
 
-	if url == nil {
+	if url == "" {
 		return "-", "-"
 	}
 

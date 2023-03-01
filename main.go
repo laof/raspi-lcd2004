@@ -211,7 +211,7 @@ var list []string
 func weatherInfo(lcd *device.Lcd) {
 
 	w, t := weatherapi()
-	data, err := os.ReadFile("en.txt")
+	data, err := os.ReadFile("en")
 
 	if err != nil {
 		return
@@ -257,7 +257,7 @@ type Lives struct {
 	HumidityFloat    string `json:"humidity_float"`
 }
 
-var url, _ = os.ReadFile("url.txt")
+var url, _ = os.ReadFile("api")
 
 func weatherapi() (string, string) {
 

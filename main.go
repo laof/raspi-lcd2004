@@ -79,7 +79,7 @@ func main() {
 	show(1, "Raspberry Pi!")
 
 	//weather
-	show(2, "Update Weather...")
+	show(2, "")
 
 	go func() {
 		for {
@@ -193,7 +193,7 @@ func temp() (output string) {
 	return
 }
 
-var empty = "                    "
+var empty = strings.Repeat(" ", 20)
 
 func safeScreen(txt string) string {
 	max := 20
@@ -218,11 +218,20 @@ func weatherInfo() {
 	for i, v := range list {
 
 		if v == w {
-			en = strings.ToTitle(list[i])
+			en = list[i+1]
 			break
 		}
 	}
 
+	// 加了会被清屏 啥情况
+	// hour := time.Now().Format("15")
+	// h, _ := strconv.Atoi(hour)
+
+	// if strings.Contains(w, "雨") && h >= 7 && h < 21 {
+	// 	lcd.BacklightOn()
+	// } else {
+	// 	lcd.BacklightOff()
+	// }
 	show(2, fmt.Sprintf("%v %v'C", en, t))
 
 }

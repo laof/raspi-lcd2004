@@ -193,7 +193,7 @@ func temp() (output string) {
 	return
 }
 
-var empty = "                    "
+var empty = strings.Repeat(" ", 20)
 
 func safeScreen(txt string) string {
 	max := 20
@@ -221,6 +221,15 @@ func weatherInfo() {
 			en = strings.ToTitle(list[i])
 			break
 		}
+	}
+
+	hour := time.Now().Format("15")
+	h, _ := strconv.Atoi(hour)
+
+	if h >= 7 && h < 21 && strings.Contains(w, "雨") {
+		lcd.BacklightOn()
+	} else {
+		lcd.BacklightOff()
 	}
 
 	show(2, fmt.Sprintf("%v %v'C", en, t))

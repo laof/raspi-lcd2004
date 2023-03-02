@@ -26,9 +26,9 @@ import (
 var restapi string
 
 //go:embed en
-var en string
+var english string
 
-var list []string = strings.Split(en, "\r\n")
+var list []string = strings.Split(english, "\r\n")
 
 func check(err error) {
 	if err != nil {
@@ -223,7 +223,7 @@ func weatherInfo() {
 		}
 	}
 
-	// 加了会被清屏 啥情况
+	// 被清屏了..
 	// hour := time.Now().Format("15")
 	// h, _ := strconv.Atoi(hour)
 
@@ -232,6 +232,7 @@ func weatherInfo() {
 	// } else {
 	// 	lcd.BacklightOff()
 	// }
+
 	show(2, fmt.Sprintf("%v %v'C", en, t))
 
 }

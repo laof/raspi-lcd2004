@@ -23,10 +23,12 @@ import (
 )
 
 //go:embed api
-var api []byte
+var restapi string
 
 //go:embed en
-var us []byte
+var en string
+
+var list []string = strings.Split(en, "\r\n")
 
 func check(err error) {
 	if err != nil {
@@ -39,8 +41,11 @@ func d2(nub float64) float64 {
 	return nub
 }
 
-func show(lcd *device.Lcd, txt string) {
+func show(line int, txt string) {
+	mutex.Lock()
+	lcd.SetPosition(line, 0)
 	fmt.Fprint(lcd, safeScreen(txt))
+	mutex.Unlock()
 }
 
 var (
@@ -48,14 +53,16 @@ var (
 	failed = "Failed"
 )
 
+var lcd *device.Lcd
+
 func main() {
 
 	logger.ChangePackageLogLevel("i2c", logger.InfoLevel)
 	i2c, err := i2c.NewI2C(0x27, 1)
 	check(err)
 
-	lcd, e := device.NewLcd(i2c, device.LCD_20x4)
-	check(e)
+	lcd, _ = device.NewLcd(i2c, device.LCD_20x4)
+
 	lcd.BacklightOff()
 	lcd.Clear()
 
@@ -66,44 +73,38 @@ func main() {
 
 	lcd.Home()
 	// wifi
-	lcd.SetPosition(0, 0)
-	show(lcd, "Hello,")
+	show(0, "Hello,")
 
 	// cpu
-	lcd.SetPosition(1, 0)
-	show(lcd, "Raspberry Pi!")
+	show(1, "Raspberry Pi!")
 
 	//weather
-	lcd.SetPosition(2, 0)
-	show(lcd, "Update Weather...")
+	show(2, "Update Weather...")
 
 	go func() {
 		for {
-			wifiCpuInfo(lcd)
+			wifiCpuInfo()
 			time.Sleep(3 * time.Second)
 		}
 	}()
 
 	go func() {
 		time.Sleep(10 * time.Second)
-		weatherInfo(lcd)
+		weatherInfo()
 		for {
 			time.Sleep(30 * time.Minute)
-			weatherInfo(lcd)
+			weatherInfo()
 		}
 	}()
 
 	for {
-		mutex.Lock()
 		t := time.Now()
-		lcd.SetPosition(3, 0)
-		show(lcd, t.Format("15:04:05  2006-01-02"))
-		mutex.Unlock()
+		show(3, t.Format("15:04:05  2006-01-02"))
 		time.Sleep(1 * time.Second)
 	}
 }
 
-func wifiCpuInfo(lcd *device.Lcd) {
+func wifiCpuInfo() {
 
 	idle0, total0 := cpu()
 	time.Sleep(3 * time.Second)
@@ -117,12 +118,8 @@ func wifiCpuInfo(lcd *device.Lcd) {
 
 	net := network()
 
-	mutex.Lock()
-	lcd.SetPosition(0, 0)
-	show(lcd, "Network: "+net)
-	lcd.SetPosition(1, 0)
-	show(lcd, base)
-	mutex.Unlock()
+	show(0, "Network: "+net)
+	show(1, base)
 
 }
 
@@ -212,33 +209,21 @@ func safeScreen(txt string) string {
 
 }
 
-var list []string
-
-var english = string(us)
-
-func weatherInfo(lcd *device.Lcd) {
-
-	if english == "" {
-		return
-	}
+func weatherInfo() {
 
 	w, t := weatherapi()
-	list = strings.Split(english, "\r\n")
 
 	var en string = "unknown"
 
 	for i, v := range list {
 
 		if v == w {
-			en = list[i+1]
+			en = strings.ToTitle(list[i])
 			break
 		}
 	}
 
-	mutex.Lock()
-	lcd.SetPosition(2, 0)
-	show(lcd, fmt.Sprintf("%v %v'C", en, t))
-	mutex.Unlock()
+	show(2, fmt.Sprintf("%v %v'C", en, t))
 
 }
 
@@ -263,15 +248,9 @@ type Lives struct {
 	HumidityFloat    string `json:"humidity_float"`
 }
 
-var url = string(api)
-
 func weatherapi() (string, string) {
 
-	if url == "" {
-		return "-", "-"
-	}
-
-	resr, err := http.Get(string(url))
+	resr, err := http.Get(restapi)
 
 	if err != nil {
 		return "-", "-"

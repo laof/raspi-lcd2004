@@ -226,7 +226,7 @@ func weatherInfo() {
 	hour := time.Now().Format("15")
 	h, _ := strconv.Atoi(hour)
 
-	if h >= 7 && h < 21 && strings.Contains(w, "雨") {
+	if w != "" && strings.Contains(w, "雨") && h >= 7 && h < 21 {
 		lcd.BacklightOn()
 	} else {
 		lcd.BacklightOff()
@@ -262,7 +262,7 @@ func weatherapi() (string, string) {
 	resr, err := http.Get(restapi)
 
 	if err != nil {
-		return "-", "-"
+		return "", ""
 	}
 
 	defer resr.Body.Close()
@@ -270,14 +270,14 @@ func weatherapi() (string, string) {
 	body, e := io.ReadAll(resr.Body)
 
 	if e != nil {
-		return "-", "-"
+		return "", ""
 	}
 
 	var data *JSONData
 	err = json.Unmarshal(body, &data)
 
 	if err != nil {
-		return "-", "-"
+		return "", ""
 	}
 
 	return data.Lives[0].Weather, data.Lives[0].Temperature

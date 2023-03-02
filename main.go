@@ -226,14 +226,13 @@ func weatherInfo() {
 		}
 	}
 
-	// 被清屏了..
 	hour := time.Now().Format("15")
 
 	h, _ := strconv.Atoi(hour)
 
 	if strings.Contains(w, "雨") && h >= 7 && h < 21 {
 
-		// Backlight 不能随便调用，需要light控制
+		// Backlight 不能随便调用，需要light控制  不然会被被清屏了..
 		if light == false {
 			lcd.BacklightOn()
 			light = true

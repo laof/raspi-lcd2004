@@ -28,6 +28,8 @@ var restapi string
 //go:embed en
 var english string
 
+var light bool = true
+
 var list []string = strings.Split(english, "\r\n")
 
 func check(err error) {
@@ -64,6 +66,7 @@ func main() {
 	lcd, _ = device.NewLcd(i2c, device.LCD_20x4)
 
 	lcd.BacklightOff()
+	light = false
 	lcd.Clear()
 
 	defer lcd.Clear()
@@ -224,14 +227,21 @@ func weatherInfo() {
 	}
 
 	// 被清屏了..
-	// hour := time.Now().Format("15")
-	// h, _ := strconv.Atoi(hour)
+	hour := time.Now().Format("15")
 
-	// if strings.Contains(w, "雨") && h >= 7 && h < 21 {
-	// 	lcd.BacklightOn()
-	// } else {
-	// 	lcd.BacklightOff()
-	// }
+	h, _ := strconv.Atoi(hour)
+
+	if strings.Contains(w, "雨") && h >= 7 && h < 21 {
+
+		// Backlight 不能随便调用，需要light控制
+		if light == false {
+			lcd.BacklightOn()
+			light = true
+		}
+
+	} else if light {
+		lcd.BacklightOff()
+	}
 
 	show(2, fmt.Sprintf("%v %v'C", en, t))
 

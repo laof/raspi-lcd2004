@@ -26,9 +26,9 @@ import (
 var restapi string
 
 //go:embed en
-var en string
+var english string
 
-var list []string = strings.Split(en, "\r\n")
+var list []string = strings.Split(english, "\r\n")
 
 func check(err error) {
 	if err != nil {
@@ -79,7 +79,7 @@ func main() {
 	show(1, "Raspberry Pi!")
 
 	//weather
-	show(2, "Update Weather...")
+	show(2, "")
 
 	go func() {
 		for {
@@ -218,7 +218,7 @@ func weatherInfo() {
 	for i, v := range list {
 
 		if v == w {
-			en = strings.ToTitle(list[i])
+			en = list[i+1]
 			break
 		}
 	}

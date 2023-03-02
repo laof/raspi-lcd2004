@@ -232,7 +232,7 @@ func weatherInfo() {
 
 	if strings.Contains(w, "雨") && h >= 7 && h < 21 {
 
-		// Backlight 不能随便调用，需要light控制  不然会被被清屏了..
+		// Backlight 不能随便调用，需要light控制  不然会被清屏了..
 		if light == false {
 			lcd.BacklightOn()
 			light = true

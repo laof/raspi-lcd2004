@@ -1,3 +1,9 @@
+find PID
+ps aux   
+
+sudo kill xxx
+
+
 ### Setup WiFi for lite img
 new a file wpa_supplicant.conf in root folder，adding as below
 

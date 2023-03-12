@@ -234,12 +234,16 @@ func weatherInfo() {
 
 		// Backlight 不能随便调用，需要light控制  不然会被清屏了..
 		if light == false {
+			mutex.Lock()
 			lcd.BacklightOn()
 			light = true
+			mutex.Unlock()
 		}
 
 	} else if light {
+		mutex.Lock()
 		lcd.BacklightOff()
+		mutex.Unlock()
 	}
 
 	show(2, fmt.Sprintf("%v %v'C", en, t))

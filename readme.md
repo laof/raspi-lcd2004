@@ -1,8 +1,9 @@
-find PID
-ps aux   
+### find PID
+```
+$ ps aux   
 
-sudo kill xxx
-
+$ sudo kill xxx
+```
 
 ### Setup WiFi for lite img
 new a file wpa_supplicant.conf in root folder，adding as below

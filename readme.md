@@ -1,3 +1,96 @@
+### 0, Enable I2C
+
+```
+sudo raspi-config
+```
+
+### 1，Update Resource
+
+```
+sudo apt update
+sudo apt upgrade
+```
+
+### 2，Install latest Golang
+
+arm64 for raspberry 64 bit system, we will to download xx.arm6l file, for more version please to see https://golang.google.cn/dl 
+
+```
+wget https://dl.google.com/go/go1.20.6.linux-armv6l.tar.gz
+```
+
+installing
+```
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.20.6.linux-armv6l.tar.gz
+```
+
+editing env
+
+```
+sudo nano ~/.profile
+```
+
+```
+...
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# set go path here
+export PATH=$PATH:/usr/local/go/bin
+```
+
+updating source
+```
+source ~/.profile
+```
+
+check
+
+```
+go version
+```
+
+setup proxy
+```
+go env -w GOPROXY=https://goproxy.cn,direct
+```
+
+### 3, Install  raspi-lcd2004
+
+```
+git clone https://github.com/laof/raspi-lcd2004.git
+```
+
+### build package
+```
+go build -o lcd2004
+
+```
+### chmod package
+```
+chmod 777 lcd2004
+chmod +x lcd2004
+```
+
+
+### setup autostart
+
+
+```
+sudo nano /etc/rc.local
+```
+
+```
+...
+sudo /xxxxx &
+sudo /home/pi/raspi-lcd2004/lcd2004
+exit 0
+```
+
+---------- end ------------------
+
 ### find PID
 ```
 $ ps aux   
@@ -17,86 +110,6 @@ network={
 	ssid="wifiname"
 	psk="psw"
 }
-```
-
-update resource
-```
-sudo apt update
-sudo apt upgrade
-```
-
-
-### autostart
-
-build
-```
-go build -o lcd2004
-chmod 777 lcd2004
-chmod +x lcd2004
-```
-
-edit
-```
-sudo nano /etc/rc.local
-```
-add
-```
-...
-sudo /xxxxx &
-sudo /home/pi/raspi-lcd2004/lcd2004
-exit 0
-```
-
-
-### Install latest Golang
-
-arm64 for raspberry 64 bit system, we will to download xx.arm6l file, for more version please to see https://golang.google.cn/dl 
-
-```
-wget https://dl.google.com/go/go1.20.6.linux-armv6l.tar.gz
-
-```
-
-installing
-```
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.20.6.linux-armv6l.tar.gz
-```
-
-editing configuration
-
-```
-sudo nano ~/.profile
-```
-
-adding path
-
-```
-...
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-# set go path here
-export PATH=$PATH:/usr/local/go/bin
-```
-
-updating
-```
-source ~/.profile
-```
-
-check
-```
-go version
-go env -w GOPROXY=https://goproxy.cn,direct
-
-```
-
-### Enable I2C
-
-```
-sudo raspi-config
 ```
 
 detect connected devices
@@ -132,10 +145,7 @@ i2cdetect -y 1
 
 
 
-### clone 
-```
-git clone https://github.com/laof/raspi-lcd2004.git
-```
+
 
 ### readme
 https://github.com/laof/raspi-lcd2004

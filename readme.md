@@ -53,12 +53,13 @@ exit 0
 arm64 for raspberry 64 bit system, we will to download xx.arm6l file, for more version please to see https://golang.google.cn/dl 
 
 ```
-wget https://golang.google.cn/dl/go1.20.1.linux-armv6l.tar.gz
+wget https://dl.google.com/go/go1.20.6.linux-armv6l.tar.gz
+
 ```
 
 installing
 ```
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.20.1.linux-armv6l.tar.gz
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.20.6.linux-armv6l.tar.gz
 ```
 
 editing configuration

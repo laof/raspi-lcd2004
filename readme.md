@@ -84,7 +84,9 @@ sudo nano /etc/rc.local
 
 ```
 ...
+...
 sudo /xxxxx &
+cd /home/pi/my-fs && sudo ./fs &
 sudo /home/pi/raspi-lcd2004/lcd2004
 exit 0
 ```

@@ -2,6 +2,7 @@
 
 ```
 sudo raspi-config
+Interface Options > I2C > Enable
 ```
 
 ### 1，Update Resource

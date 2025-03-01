@@ -75,6 +75,9 @@ git clone https://github.com/laof/raspi-lcd2004.git
 ```
 go build -o lcd2004
 
+// or
+CGO_ENABLED=0 go build -o lcd2004 // fix: gcc: error: unrecognized command-line option '-marm'
+
 ```
 ### chmod package
 ```

@@ -170,7 +170,8 @@ https://github.com/laof/raspi-lcd2004
 ```
 sudo nano /etc/ssh/sshd_config
 ```
-add permission
+
+允许SSH root身份登录
 ```
 #PermitRootLogin prohibit-password
 #add here

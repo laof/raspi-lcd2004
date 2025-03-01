@@ -22,7 +22,7 @@ import (
 	logger "github.com/d2r2/go-logger"
 )
 
-//go:embed api
+// desabled //go:embed api
 var restapi string
 
 //go:embed en
@@ -91,14 +91,14 @@ func main() {
 		}
 	}()
 
-	go func() {
-		time.Sleep(10 * time.Second)
-		weatherInfo()
-		for {
-			time.Sleep(30 * time.Minute)
-			weatherInfo()
-		}
-	}()
+	// go func() {
+	// 	time.Sleep(10 * time.Second)
+	// 	weatherInfo()
+	// 	for {
+	// 		time.Sleep(30 * time.Minute)
+	// 		weatherInfo()
+	// 	}
+	// }()
 
 	for {
 		t := time.Now()

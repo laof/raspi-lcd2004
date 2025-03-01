@@ -118,6 +118,7 @@ network={
 detect connected devices
 
 ```
+sudo apt-get install i2c-tools
 i2cdetect -y 1
 ```
 ```

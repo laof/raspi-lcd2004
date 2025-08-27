@@ -181,6 +181,11 @@ PermitRootLogin yes
 setup new passwd for root
 
 ```
+password:root
+re-password:root
+```
+
+```
 sudo passwd root
 ```
 reboot
